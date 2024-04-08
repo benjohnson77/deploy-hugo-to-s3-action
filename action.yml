@@ -54,6 +54,13 @@ runs:
     - id: hugo-build
       run: $HOME/hugo --logLevel info
       shell: bash
+    - id: aws profile 
+      run: |
+        aws configure --profile website <<-EOF > /dev/null 2>&1
+        ${AWS_ACCESS_KEY_ID}
+        ${AWS_SECRET_ACCESS_KEY}
+        ${AWS_REGION}
+      shell: bash 
     
     - id: deploy-to-s3
       if: inputs.skip-deployment == 'false'
@@ -80,4 +87,5 @@ runs:
       env:
         AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+        AWS_REGION: 'us-west-2'
       shell: bash
