@@ -48,7 +48,7 @@ runs:
       shell: bash
     
     - id: hugo-build
-      run: $HOME/hugo -v
+      run: $HOME/hugo --logLevel info
       shell: bash
     
     - id: deploy-to-s3
